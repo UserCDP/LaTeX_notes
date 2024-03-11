@@ -1,0 +1,137 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{esint}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+
+
+\author{ @usercdp }
+\date{June 2023}
+
+\begin{document}
+\subsubsection{Areas}
+$\displaystyle\iint_A h(x,y) dx dy = \displaystyle\int_{x=a}^b\int_{y=c}^d f(x)g(y) dxdy=\left(\displaystyle\int_{x=a}^b f(x)dx\right)\left(\displaystyle\int_{y=c}^d g(y)dy\right)$
+
+\subsubsection{Polar coordinates}
+$x = r\,cos\theta$, $y=r\,sin\theta$, or inverting
+
+\vspace{5pt}
+
+\noindent$r=\sqrt{x^2+y^2}$, $\theta=arctan\frac{y}{x}$
+
+\subsubsection{Spherical coordinates}
+$r^2=x^2+y^2+z^2$
+
+\vspace{5pt}
+
+\noindent$x=r\,sin\theta\cos\phi$, $y=r\,sin\theta sin\phi$, $z=r\,cos\theta$
+
+\subsubsection{Volumes}
+$V = \displaystyle\iiint_V dx dy dz = \left(\displaystyle\int_{x=0}^L dx\right)\left(\displaystyle\int_{y=0}^\ell dy\right)\left(\displaystyle\int_{z=0}^h dz\right)=L\ell h$
+
+\subsubsection{Total differentials}
+$df(x,y,...)=\frac{\partial f}{\partial x}dx+\frac{\partial f}{\partial y}dy+...$
+
+\subsubsection{Chain rule}
+$\frac{dz}{dt}=\frac{\partial z}{\partial x} \frac{dx}{dt}+\frac{\partial z}{\partial y}\frac{dy}{df}$
+
+\subsubsection{Directional derivative}
+$\frac{d\phi(x,y,z)}{ds}=\overrightarrow{\nabla}\phi(x,y,z)\cdot\mathbf{u}$
+
+\vspace{5pt}
+
+\noindent$\overrightarrow{\nabla}\phi=grad\phi=\frac{\partial\phi}{\partial x}\mathbf{i}+\frac{\partial\phi}{\partial y}\mathbf{j}+\frac{\partial\phi}{\partial z}\mathbf{k}$
+
+\textbf{The gradient of a scalar field is a vector and can be equivalently written as}$\vec{\nabla}\phi$.
+
+\subsubsection{Gradient in polar coordinates}
+$\nabla f=\mathbf{e}_r\frac{\partial f}{\partial r} + \mathbf{e}_\theta\frac{1}{r}\frac{\partial f}{\partial \theta}$
+
+\subsubsection{Gradient in cylindrical coordinates}
+$\nabla f=\mathbf{e}_r\frac{\partial f}{\partial r} + \mathbf{e}_\theta\frac{1}{r}\frac{\partial f}{\partial \theta} + \mathbf{e}_z\frac{\partial f}{\partial z}$
+
+\subsubsection{Divergence}
+$\mathbf{\overrightarrow{\nabla}\cdot \overrightarrow{V}} = \frac{\partial V_x}{\partial x} + \frac{\partial V_y}{\partial y} + \frac{\partial V_z}{\partial z}$
+
+\subsubsection{Curl or rotational}
+$\mathbf{\overrightarrow{\nabla} \times \overrightarrow{V}} = \left| \begin{array}{ccc}
+    \mathbf{i} & \mathbf{j} & \mathbf{k} \\
+    \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+    V_x & V_y & V_z
+\end{array} \right|$
+
+\subsubsection{Laplacian of a scalar field}
+$\nabla^2\phi\equiv\vec{\nabla}\cdot\vec{\nabla}\phi = \frac{\partial^2\phi}{\partial x^2} + \frac{\partial^2\phi}{\partial y^2} + \frac{\partial^2\phi}{\partial z^2}$
+
+\subsubsection{Line integrals}
+$W_{AB}=\displaystyle\int_A^B\vec{F}(s)\cdot d\vec{r}(S)$
+
+\subsubsection{Conservative fields}
+It is sufficient and necessary for a force to be conservative that $curl\,\vec{F}=\vec{0}$
+
+\subsubsection{Green's theorem}
+$\displaystyle\iint_A \left(\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}\right)dxdy = \displaystyle\oint_{\partial A} (P\, dx + Q \, dy)$
+
+\subsubsection{Divergence theorem in two and three dimensions}
+$\displaystyle\iint_A div \, \vec{V}dxdy = \displaystyle\oint_{\partial A}\vec{V}\cdot \vec{n} ds$
+
+\vspace{2pt}
+
+\noindent$\displaystyle\iiint_V div (curl \, \vec{F})d^{(3)}\tau = \displaystyle\oiint_A curl \, \vec{F} \cdot \vec{n} d^{(2)}\sigma$
+
+\vspace{2pt}
+
+\noindent$\displaystyle\iiint_V div \vec{F}d^{(3)}\tau = \displaystyle\iint_A\vec{F}\cdot\vec{n}d^{(2)}\sigma$
+
+\subsubsection{Stokes' theorem in two and three dimensions}
+$\displaystyle\iint_A (curl \, \vec{V}) \cdot \vec{k}\, dx dy = \displaystyle\oint_{\partial A} \vec{V}\cdot d\vec{r}$
+
+\noindent$\displaystyle\oiint_A curl \, \vec{F} \cdot \vec{n} d^{(2)}\sigma = \displaystyle\oint_{\circlearrowright}\vec{F}\cdot d \vec{r}$
+
+\subsubsection{Divergence theorem on a cylinder}
+$\displaystyle\iint_\Sigma \vec{V}\cdot \vec{n} d^{(2)}\sigma = - \displaystyle\iint_{2\,disks} \vec{V}\cdot\vec{n} d^{(2)}\sigma$
+
+\subsubsection{Stokes' theorem in cylindrical coordinates}
+$\displaystyle\iint_\Sigma curl \vec{F}\cdot\vec{n}d^{(2)}\sigma = \displaystyle\oint_{topdisk, \circlearrowright}\vec{F}\cdot d\vec{r} + \displaystyle\oint_{bottomdisk, \circlearrowleft}\vec{F}\cdot d\vec{r}$
+
+\subsubsection{Stokes' theorem in spherical coordinates}
+$\displaystyle\iint_{\smallfrown}curl \,\vec{F}\cdot\vec{n}d^{(2)}\sigma = + \displaystyle\iint_{topdisk} curl\,\vec{F}\cdot\vec{k}d^{(2)}\sigma = \displaystyle\int_\circlearrowleft\vec{F}\cdot d\vec{r} = \displaystyle\int_\circlearrowleft\vec{F}\cdot Rd\phi\vec{e}_\phi$
+
+\vspace{4pt}
+
+\noindent$\displaystyle\iint_{\smallsmile}curl \,\vec{F}\cdot\vec{n}d^{(2)}\sigma = - \displaystyle\iint_{bottomdisk} curl\,\vec{F}\cdot\vec{k}d^{(2)}\sigma = \displaystyle\int_\circlearrowleft\vec{F}\cdot d\vec{r}$
+
+\subsection{Fourier series}
+\begin{equation}
+f(x)=\frac{a_0}{2}+\displaystyle\sum_{n=1}^{+\infty}a_n cos\frac{n\pi x}{L} + \displaystyle\sum_{n=1}^{+\infty}b_nsin\frac{n\pi x}{L}
+\end{equation}
+
+\subsubsection{Coefficients}
+\begin{equation}
+\begin{cases}
+    a_0=\frac{1}{L}\displaystyle\int_{-L}^{L}f(x)dx, \quad a_n=\frac{1}{L}\displaystyle\int_{-L}^{L}f(x)cos\frac{n\pi x}{L}dx, \\ b_n = \frac{1}{L}\displaystyle\int_{-L}^{L}f(x)sin\frac{n\pi x}{L} dx
+    \end{cases}
+\end{equation}
+
+\subsection{Complex form of Fourier series}
+\centerline{$f(x)=\displaystyle\sum_{n=-\infty}^{+\infty}c_ne^{i\frac{n\pi x}{L}}$}
+
+\subsubsection{Coefficient}
+$c_n = \frac{1}{2L}\displaystyle\int_{-L}^{L}f(x)e^{-i\frac{n\pi x}{L}}dx$
+
+\subsection{Dirichlet conditions}
+If $f(x)$
+$\bullet$ is a periodic function of period $2L$,\\
+$\bullet$ is single-valued between $-L$ and $L$,\\
+$\bullet$ has a finite number of maximum and minimum values, and a finite number of discontinuities,\\
+$\bullet$ and if $\displaystyle\int_{_L}^L|f(x)|$ is finite,
+
+then the Fourier series (1) with the coefficients given by (2) converges to $f(x)$ at all the points where $f(x)$ is continuous;
+
+at jumps the Fourier series converges to the midpoint of the jump, including for jumps occurring at $\pm L$
+
+\subsubsection{Parseval's theorem}
+$\frac{1}{2L}\displaystyle\int_{-L}^L|f(x)|^2dx = \left(\frac{a_0}{2}\right)^2 + \frac{1}{2}\displaystyle\sum^{\infty}_{1}a_n^2 + \frac{1}{2}\displaystyle\sum_1^{\infty}b_n^2 = \displaystyle\sum_{-\infty}^{+\infty}|c_n|^2$
+\end{document}
