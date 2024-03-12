@@ -1,0 +1,275 @@
+\documentclass{article}
+\usepackage[a4paper, top=1cm, left=2cm, right=2cm, bottom=2cm]{geometry}
+\usepackage{titling}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{pgf}
+\usepackage{import}
+\usepackage{lmodern}
+\usepackage[most]{tcolorbox}
+\usepackage{amssymb}
+
+\newcounter{thcount}[subsection] % Define a new counter tied to sections
+\newcommand{\themybox}{\thesubsection.\arabic{thcount}}
+
+\newcounter{defcount}[subsection] % Define a new counter tied to sections
+\newcommand{\defbox}{\thesubsection.\arabic{defcount}}
+
+\newcounter{propcount}[subsection] % Define a new counter tied to sections
+\newcommand{\propbox}{\thesubsection.\arabic{propcount}}
+
+\newcounter{corrcount}[subsection] % Define a new counter tied to sections
+\newcommand{\corrbox}{\thesubsection.\arabic{corrcount}}
+
+\predate{}
+\postdate{}
+
+\title{MAA207 text}
+\author{@usercdp}
+\date{}
+
+\newcommand{\theorem}[2]{ % Arguments: #1 = title, #2 = content
+\stepcounter{thcount}
+    \begin{tcolorbox}[
+        colback=red!10!white, % Background color for the box
+        colframe=red!20, % Border color
+        coltitle=black, % Title text color
+        fonttitle=\bfseries, % Bold title font
+        title={%
+        \if\relax\detokenize{#1}\relax
+            {Theorem \themybox}%
+        \else%
+            {Theorem \themybox: #1}%
+        \fi%
+    }, % Title text with full width
+        enhanced, % For advanced settings
+        boxed title style={
+            colback=cyan!60!black, % Color of the bar
+            outer arc=0pt, % No rounded corners
+            arc=0pt, % No rounded corners
+        },
+        before upper={\noindent}, % Adjusting content position
+    ]
+    #2 % Content
+    \end{tcolorbox}
+    % \vspace{1pt}
+}
+
+\newcommand{\definition}[2]{ % Arguments: #1 = title, #2 = content
+    \stepcounter{defcount}
+    % \renewcommand{\defbox}{\thesubsection.\arabic{defcount}}
+    \begin{tcolorbox}[
+        colback=green!10!white, % Background color for the box
+        colframe=green!70!blue!30!white, % Border color
+        coltitle=black, % Title text color
+        fonttitle=\bfseries, % Bold title font
+        title={{Definition \defbox: #1}}, % Title text with full width
+        enhanced, % For advanced settings
+        boxed title style={
+            colback=cyan!60!black, % Color of the bar
+            outer arc=0pt, % No rounded corners
+            arc=0pt, % No rounded corners
+        },
+        before upper={\noindent}, % Adjusting content position \hspace*{0.5em}
+    ]
+    #2 % Content
+    \end{tcolorbox}
+    % \vspace{1pt}
+}
+
+\newcommand{\proposition}[2]{ % Arguments: #1 = title, #2 = content
+    \stepcounter{propcount}
+    \begin{tcolorbox}[
+        colback=cyan!10!white, % Background color for the box
+        colframe=cyan!20, % Border color
+        coltitle=black, % Title text color
+        fonttitle=\bfseries, % Bold title font
+        title={
+        \if\relax\detokenize{#1}\relax
+            {Proposition \propbox}
+        \else
+            {Proposition \propbox: #1}
+        \fi 
+        },% Title text with full width
+        enhanced, % For advanced settings
+        boxed title style={
+            colback=cyan!60!black, % Color of the bar
+            outer arc=0pt, % No rounded corners
+            arc=0pt, % No rounded corners
+        },
+        before upper={\noindent}, % Adjusting content position
+    ]
+    #2 % Content
+    \end{tcolorbox}
+    % \vspace{1pt}
+}
+
+\newcommand{\corrolary}[1]{ % Arguments: #1 = title, #2 = content
+\stepcounter{corrcount}
+    \begin{tcolorbox}[
+        colback=blue!10!white, % Background color for the box
+        colframe=blue!20, % Border color
+        coltitle=black, % Title text color
+        fonttitle=\bfseries, % Bold title font
+        title=\raggedright{{Corrolary \corrbox}}, % Title text with full width
+        enhanced, % For advanced settings
+        boxed title style={
+            colback=cyan!60!black, % Color of the bar
+            outer arc=0pt, % No rounded corners
+            arc=0pt, % No rounded corners
+        },
+        before upper={\noindent}, % Adjusting content position
+    ]
+    #1 % Content
+    \end{tcolorbox}
+    % \vspace{1pt}
+}
+
+\begin{document}
+
+\maketitle
+
+\section{Chapter I: Sequences and series of functions}
+
+\subsection{Pointwise convergence and the problem of interchanging limits}
+
+\definition{Pointwise convergence}{
+(1) Let $(f_n)_{n\in\mathbb{N}}$ be a sequence of functions on $\Omega$. We say that the sequence $(f_n)_{n\in\mathbb{N}}$ is pointwise convergent if for all $x\in\Omega$, $(f_n(x))_{n\in\mathbb{N}}$ is a converging numerical sequence. If $(f_n)_{n\in\mathbb{N}}$ is pointwise convergent, we can define a function $f:\Omega\rightarrow\mathbb{K}$ by $$f(x)=\displaystyle\lim_{n\rightarrow\infty}f_n(x).$$ We say that $f$ is the (pointwise) \textbf{limit} of the sequence $(f_n)_{n\in\mathbb{N}}.$
+\\
+
+(2) Let $(g_n)_{n\in\mathbb{N}}$ be a sequence of functions $\Omega\rightarrow\mathbb{K}$. We say that the series $\sum g_n$ is \textbf{pointwise convergent} if for every $x\in\Omega$, the numerical series $\sum g_n(x)$ is convergent. If the series $\sum g_n$ is pointwise convergent, we can define $$g(x)=\displaystyle\sum_{n=0}^\infty g_n(x), x\in\Omega,$$ and we call $g$ the \textbf{sum} of the series $\sum g_n.$
+\\
+
+We can note that a series of functions $(\sum g_n)_n$ is pointwise convergent if and only if the sequence of partial sums $(S_N=\sum_{n\leq N}g_n)_N$ is pointwise convergent.
+}
+
+\vspace{-10pt}
+
+\begin{figure}[htbp]
+    \centering
+  \scalebox{0.45}{\input{pointwise_convergence.pgf}}
+  \vspace{-16pt}
+  \caption{A sequence of converging functions}
+    % \scalebox{0.4}{\input{pointwise_convergence_of_sum.pgf}}
+  \label{fig:example}
+\end{figure}
+
+\vspace{-10pt}
+
+\proposition{}{Let $f_n:J\rightarrow\mathbb{R}$ be a sequence of functions defined on an interval J of \mathbb{R}, which converges pointwise to a function $f$.
+
+(1) If for all n, the function $f_n$ is increasing (respectively decreasing), the function $f$ is increasing (not necessarily strictly) (respectively decreasing (not necessarily strictly)), \\
+
+(2) Assume that the interval $J$ is centered at 0. If for all $n$ the functions $f_n$ are even (respectively odd), the function $f$ is even (respectively odd), \\
+
+(3) Assume that $J=\mathbb{R}$ and let $T>0$. If for all $n$, the function $f_n$ is $T$-periodic, then the function $f$ is $T$-periodic.
+}
+
+\subsection{Uniform convergence}
+
+\definition{Uniform convergence}{
+(1) We say that a sequence $(f_n)_{n\in\mathbb{N}}$ of function \textbf{converges uniformly} to a function $f$ if for all $\varepsilon > 0$ there exists $N$ such that for all $n\geq N$ and for all $x\in\Omega$ we have $$|f_n(x)-f(x)| \leq \varepsilon.$$
+
+(2) We say that a series of functions $\sum f_n$ is \textbf{uniformly convergent} if the sequence of partial sums $\displaystyle (\sum_{n\leq N} f_n)_N$ is uniformly convergent.
+}
+
+\vspace{-10pt}
+
+\begin{figure}[htbp]
+    \centering
+  \scalebox{0.5}{\input{uniform_convergence.pgf}}
+  \vspace{-16pt}
+  \caption{A sequence of uniformly converging functions}
+  \label{fig:example}
+\end{figure}
+
+\proposition{}{If the sequence $(f_n)_n$ converges uniformly to $f$, then it also converges pointwise.}
+
+\proposition{}{A sequence $(f_n)_n$ of functions $\Omega\rightarrow\mathbb{K}$ converges uniformly to $f$ if and only if the quanity $\| f-f_n \|_\infty$ is finite for n large enough and converges to 0 as $n\rightarrow\infty$.}
+
+\theorem{Uniform convergence and continuity}{
+Let $f_n:\Omega\rightarrow\mathbb{K}$ be a sequence of functions such that $f_n$ converges uniformly to a limit $f$. Let $x_0\in\Omega$. If the $f_n$ are continuous at $x_0$ then $f$ is also continuous at $x_0$.
+}
+
+\corrolary{Let $f_n:\Omega\rightarrow\mathbb{K}$ be a sequence of functions such that $f_n$ converges uniformly to a limit $f$. If the $f_n$ are continuous in $\Omega$ then $f$ is continuous in $\Omega$.}
+
+\theorem{Uniform Cauchy criterion}{
+    A sequence of functions $f_n:\Omega\rightarrow\mathbb{K}$ converges uniformly on $\Omega$ if and only if all $\varepsilon > 0$, there exists $N$ such that for all $m\geq n\geq N$ and all $x\in\Omega$ $$|f_n(x)-f_m(x)|\leq\varepsilon.$$
+}
+
+\newpage
+
+\definition{Normal convergence of series}{
+Let $\sum f_n$ be a series of functions $\Omega\rightarrow\mathbb{K}$. We say that the series $\sum f_n$ is \textbf{normally convergent} if there exists a convergent numerical series of non negative numbers $\sum a_n$ such that $|f_n(x)|\leq a_n$ for all $n$ and all $x$.
+}
+
+\theorem{}{A series $\sum f_n$ which is normally convergent is uniformly convergent and thus, in particular, also pointwise convergent.}
+
+\proposition{}{Let $g_n:\Omega\rightarrow\mathbb{R}$ be a sequence of functions such that $0\leq g_{n+1}(x)\leq g_n(x)$ for all $n\in\mathbb{N}$ and $x\in\Omega$. Assume that there exists a numerical sequence $(a_n)$ with $\displaystyle\lim_{n\rightarrow\infty}a_n=0$ such that $g_n(x)\leq a_n$, for every $n\in\mathbb{N}$ and $x\in\Omega$. Then the series of function $\sum (-1)^n g_n$ is uniformly convergent on $\Omega$.}
+
+\proposition{}{Let $(a_n)$ be a decreasing sequence of positive real numbers converging to 0. Then the series $\sum (-1)^n a_n$ is convergent. Furthermore, if we denote by $S_N=\displaystyle\sum_{n\leq N} (-1)^n a_n$ the sequence of partial sums, and by $S=\displaystyle\sum^\infty_{n=0} (-1)^n a_n$ the sum of the series, then for all $n$, $S$ is between $S_n$ and $S_{n+1}$ (meaning that $S_n\leq S\leq S_{n+1}$ or $S_{n+1}\leq S\leq S_n$ depending on the relative position of $S_n$, $S_{n+1}$) and we have $|S-S_n|\leq a_{n+1}$.}
+
+\theorem{Exchange of limits}{
+Let $f_n:\Omega\rightarrow\mathbb{K}$ be a sequence of functions that converges uniformly to a limit $f$. Let $x_0\in\bar{\Omega}$ where $\bar{\Omega}$ denotes the adherence of $\Omega$ or let $x_0=\pm\infty$ in the case where $\Omega=[a, \infty )$ or $\Omega=(-\infty , b]$. Assume that for every $n$, the limit $$\displaystyle\lim_{x\rightarrow x_0}f_n(x)$$ exists and denote it by $\alpha_n$. Then, the two limits $$\displaystyle\lim_{n\rightarrow\infty}\alpha_n \text{ and } \lim_{x\rightarrow x_0} f(x)$$ exists and we have the equality $$\displaystyle\lim_{n\rightarrow\infty}\alpha_n = \lim_{x\rightarrow x_0} f(x).$$ 
+}
+
+\subsection{Integration and derivation}
+
+\proposition{}{Let $(f_n)_n$ be a sequence of continuous functions on a compact interval $I$ of $\mathbb{R}$. Assume that $f_n$ converges uniformly to a function $f$. Then, $$\displaystyle\int_I f_n\rightarrow\int_I f.$$}
+
+\proposition{}{Let $a\in\mathbb{R}, b\in\mathbb{R}\cup\{+\infty\}$ and let $f_n: [a, b) \rightarrow\mathbb{R}$ be a sequence of continuous functions, all integrable on $[a,b)$. Assume that: \\
+$\bullet$ the series of functions $\displaystyle\sum_n f_n$ is normally convergent on all segments $[a,u]\subset [a, b)$ \\
+$\bullet$ the numerical series $\displaystyle\sum_n\int^b_a |f_n(t)|dt$ is convergent. \\
+Then, the integral $\displaystyle\int_a^b\sum^\infty_{n=0}f_n(t)dt$ is convergent and we have the equality $$\displaystyle\int_a^b\left(\sum_{n=0}^\infty f_n(t)\right)dt = \sum^\infty_{n=0}\int_a^b f_n(t)dt.$$
+}
+
+\theorem{Uniform convergence and derivation}{
+Let $(f_n)$ be a sequence of functions which are derivable on the segment $[a,b]$. We assume that \\
+$\bullet$ there exists a point $x_0\in [a,b]$ such that the numerical sequence $(f_n(x_0))$ converges, \\
+$\bullet$ the sequence of functions $(f'_n)_n$ is uniformly convergent on $[a,b].$\\
+Then, $(f_n)$ converges uniformly to a function $f$ which is derivable and we have $$f'(x)=\displaystyle\lim_{n\rightarrow\infty} f'_n(x)$$ for every $x\in [a,b].$
+}
+
+\subsection{More involved topics}
+
+\theorem{Dini's theorem}{
+Let $K$ be a compact subset of $E$ and assume that \\
+$(1)$ $(f_n)$ is a sequence of continuous functions $K\rightarrow\mathbb{R}$, \\
+$(2)$ $(f_n)$ converges pointwise to a continous function $f$, \\
+$(3)$ $(f_n)$ is decreasing in the sense that $f_n(x)\geq f_{n+1}(x)$ for every $n$ and $x\in K$ \\
+Then the sequence $(f_n)$ converges uniformly to $f$ on $K$.
+}
+
+\proposition{}{Let $N: B(\Omega)\rightarrow\mathbb{R}^+$, $f\mapsto\displaystyle\sup_{x\in\Omega} |f(x)|$. $N$ is a norm on the vector space $B(\Omega)$.}
+
+\proposition{}{A sequence of functions $(f_n)$ of $B(\Omega)$ converges uniformly to a function $f\in B(\Omega)$ if and only if $\| f_n - f \|_\infty$ tends to zero.}
+
+\corrolary{The space of bounded continuous functions is a closed subspace of $B(\Omega)$.}
+
+\theorem{}{$B(\Omega )$ is a complete normed vector space.}
+
+\theorem{Weierstrass theorem}{
+Let $f: [a,b]\rightarrow\mathbb{C}$ be a continuous function. There exists a sequence of polynomials which converges uniformly to $f$ on $[a,b]$. Moreover, if $f$ is real valued, one can choose polynomials $P_n$ with real coefficients.
+}
+
+\section{Chapter II: Power series}
+\subsection{First definitions, examples, and reminders}
+
+\definition{Power series}{A power series is a series of functions $\mathbb{C}\rightarrow\mathbb{C}$ of the form $\sum a_nz^n$ where $(a_n)_n$ is a sequence of complex numbers. The $a_n$ are called the coefficients of the power series.}
+
+\proposition{\textbf{Cauchy rule} or \textbf{root test}}{Consider a series of complex numbers $\sum b_n$ and set $\beta=\lim\sup_{n\rightarrow\infty}(|b_n|)^\frac{1}{n}\in\mathbb{R}_+\cup\{+\infty\}.$ Then \\
+(1) If $\beta < 1$ the series $\sum b_n$ is absolutely convergent \\
+(2) If $\beta > 1$ the series $\sum b_n$ is divergent}
+
+\proposition{\textbf{D'Alembert rule} or \textbf{ratio test}}{Let $\sum a_n$ be a numerical series\\
+(1) If $\lim\sup_{n\rightarrow\infty} \left| \frac{a_{n+1}}{a_n} \right| < 1$, the series $\sum a_n$ is absolutely convergent\\
+(2) If $\lim\inf_{n\rightarrow\infty}\left|\frac{a_{n+1}}{a_n}\right| > 1$, the series $\sum a_n$ is divergent.}
+
+\theorem{}{Let $\sum a_nz^n$ be a power series. Set $\alpha=\lim\sup_{n\rightarrow\infty}|a_n|^\frac{1}{n}$ and $R=\frac{1}{\alpha}$ (with the convention that $R=+\infty$ if $\alpha=0$, and $R=0$ if $\alpha=+\infty$). Then, the series $\sum a_nz^n$ is absolutely convergent for $|z|<R$ and divergent for $|z|>R.$}
+
+\definition{Radius of convergence}{$R$ is called the radius of convergence of the power series $\sum a_nz^n$.}
+
+\proposition{}{Consider a power series $\sum a_nz^n$ and let $R$ be its radius of convergence. Then $R$ is the supremum of the $r\geq 0$ such that the sequence $|a_n|r^n$ is bounded.}
+
+\theorem{}{Let $\sum a_nz^n$ be a power series and $R$ be its radius of convergence. Then, for every $\varepsilon > 0$ the series $\sum a_nz^n$ converges normally on the closed ball $\bar{B}_{R-\varepsilon}=\{z\in\mathbb{C} | |z|\leq R-\varepsilon\}.$ In particular, the sum $f(z)=\sum a_nz^n$ defines a continuous function on the open ball $B_R=\{z\in\mathbb{C} | |z|<R\}.$}
+
+\end{document}
