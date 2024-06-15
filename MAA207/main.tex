@@ -270,7 +270,7 @@ Then, $(f_n)$ converges uniformly to a function $f$ which is derivable and we ha
 \theorem{Dini's theorem}{
 Let $K$ be a compact subset of $E$ and assume that \\
 $(1)$ $(f_n)$ is a sequence of continuous functions $K\rightarrow\mathbb{R}$, \\
-$(2)$ $(f_n)$ converges pointwise to a continous function $f$, \\
+$(2)$ $(f_n)$ converges pointwise to a continuous function $f$, \\
 $(3)$ $(f_n)$ is decreasing in the sense that $f_n(x)\geq f_{n+1}(x)$ for every $n$ and $x\in K$ \\
 Then the sequence $(f_n)$ converges uniformly to $f$ on $K$.
 }
@@ -353,9 +353,11 @@ Let $f: [a,b]\rightarrow\mathbb{C}$ be a continuous function. There exists a seq
 
 \proposition{}{For all $t\in\mathbb{R}$, we have $$\exp(it)=\cos(t)+i\sin(t).$$}
 
-\section{Fourier series}
+\newpage
+\section{Chapter III: Fourier series}
 
 \subsection{Introduction}
+Fun physics backstory goes here!
 
 \subsection{Trigonometric series}
 \definition{Trigonometric polynomial and trigonometric series}{(1) A \textbf{trigonometric polynomial} is a function of the form $x\mapsto\sum^N_{n=-N}c_ne^{ixn}$ or, equivalently, a function of the form $x\mapsto\frac{a_0}{2}+\sum^N_{n=1}a_n\cos(nx)+b_n\sin(nx)$, for some integer $N\geq 0$ and coefficients $c_n\in\mathbb{C}$ (respectively $a_n, b_n\in\mathbb{C}$. \\
@@ -398,9 +400,9 @@ The \textbf{Fourier series} associated to $f$ is the trigonometric series $\disp
     \item If $f$ is odd, then for all $n\in\N, a_n(f)=0$ and $c_n(f)=-c_{-n}(f).$
 \end{enumerate}}
 
-\remark{If $f:\R\rightarrow\C$ is $T$ periodic, we can alsodefine Fourier coefficients by $c^T_n(f)=\frac{1}{T}\int^T_0e^{-i\frac{2\pi}{T}nx}f(x)dx$, and the Fourier series associated to $f$ by $\sum_n c_n^T(f)e^{i\frac{2\pi}{T}nx}.$}
+\remark{If $f:\R\rightarrow\C$ is $T$ periodic, we can also define Fourier coefficients by $c^T_n(f)=\frac{1}{T}\int^T_0e^{-i\frac{2\pi}{T}nx}f(x)dx$, and the Fourier series associated to $f$ by $\sum_n c_n^T(f)e^{i\frac{2\pi}{T}nx}.$}
 
-\theorem{Fejer's theorem}{Let $f:\R\rightarrow\C$ be a continous $2\pi$ periodic function. Then, there exists a sequence $(C_n)_n$ of trigonometric polynomials such that $(C_n)_n$ converges to $f$ uniformly.}
+\theorem{Fejer's theorem}{Let $f:\R\rightarrow\C$ be a continuous $2\pi$ periodic function. Then, there exists a sequence $(C_n)_n$ of trigonometric polynomials such that $(C_n)_n$ converges to $f$ uniformly.}
 
 \subsection{Prehilbertian structure}
 \proposition{}{$\inner{\cdot}{\cdot}$ is an inner product on $D$. More precisely we have that:
@@ -412,5 +414,117 @@ The \textbf{Fourier series} associated to $f$ is the trigonometric series $\disp
     \item It is definite $\inner{f}{f}=0\Rightarrow f=0$ $\forall f\in D$
 \end{enumerate}}
 
-\proposition{}{Let $n\in\N$ and set $P_n=Vect(e^{ikx}, -n\leq k \leq n)$. Then, $P_n$ is a vector subspace of $D$ and we have $D=P_n\bigoplus P_n^\perp$ where $P_n^\perp$ denotes the orthogonal of $P_n$ for $\inner{\cdot}{\cdot}.$ Moreover, if we denote by $p_n$ the orthogonal projection onto $P_n$, we have $$p_n(f)=\sum c_k(f)e^{ikx},$$ and $$\inf_{g\in P_n}\|f-g\|^2=\|f-p_n(f)\|^2=\frac{1}{2\pi}$$} 
+\proposition{}{
+% Let $n\in\N$ and set $P_n=Vect(e^{ikx}, -n\leq k \leq n)$. Then, $P_n$ is a vector subspace of $D$ and we have $D=P_n\bigoplus P_n^\perp$ where $P_n^\perp$ denotes the orthogonal of $P_n$ for $\inner{\cdot}{\cdot}.$ Moreover, if we denote by $p_n$ the orthogonal projection onto $P_n$, we have $$p_n(f)=\sum c_k(f)e^{ikx},$$ and $$\inf_{g\in P_n}\|f-g\|^2=\|f-p_n(f)\|^2=\frac{1}{2\pi}$$
+Let $n\geq 0$ and set $P_n:=Vect(e_k| -n\leq k\leq n)\subseteq D$, $P_n^\perp :=\{f\in D | \inner{f}{g} = 0\forall g\in P_n\}.$
+
+Then,
+\begin{itemize}
+    \item $D=P_n\oplus P_n^\perp$
+    \item If $p_n:D\rightarrow P_n$ denotes the orthogonal projection (i.e. the projection parallel to $P_n^\perp$) then $$p_n(f)=\sum^n_{k=-n}c_k(f)e_k\qquad\forall f\in D$$
+    \item $\forall f\in D$ $$\inf_{g\in P_n}\|f-g\|^2=\|f-p_n(f)\|=\sum^n_{k=-n}|c_k(f)|^2$$
+\end{itemize}
+}
+
+\corrolary{Bessel inequality: For every $f\in D$, the series $\sum_{x\in\Z}|e_k(f)|^2$ is convergent and $$\sum^{+\infty}_{k=-\infty} |c_k(f)|^2\leq\|f\|^2=\frac{1}{2\pi}\int^{2\pi}_0 |f(x)|^2dx.$$}
+
+\theorem{Parseval identity}{
+Let $f:\R\rightarrow\C$ be $2\pi$-periodic and piecewise $C^0$. Then, $$\sum^{+\infty}_{k=-\infty}|c_k(f)|^2=\frac{1}{2\pi}\int^{2\pi}_0|f(x)|^2dx=\frac{|a_0(f)|^2}{4}+\frac{1}{2}|a_n(f)|^2+|b_n(f)|^2.$$
+}
+
+\corrolary{
+\begin{enumerate}
+    \item If $f\in D$ is sth $c_n(f)=0\forall n\in\Z$ then $f=0$
+    \item For $f:\R\rightarrow\C$ $2\pi$-periodic and piecewise $C^0$ we have $$c_n(f)\rightarrow 0 \text{ as } n\rightarrow\infty$$
+    \item For $f\in D$, if the Fourier series of $f$ converges uniformly on $\R$ then we have $$f(x)=\sum^\infty_{k=-\infty}c_k(f)e^{ikx}\forall x\in\R$$
+\end{enumerate}
+}
+
+\subsection{Pointwise and uniform convergence of Fourier series}
+\theorem{Jordan-Dinchet}{Let $f:\R\rightarrow\C$ be $2\pi$-periodic and pointwise $C^1$. Then, the Fourier series of $f$ converges pointwise everywhere and $$\forall x\in\R, \sum^\infty_{n=-\infty}c_n(f)e^{inx}=\frac{f(x^+)+f(x^-)}{2}$$}
+
+\corrolary{If $f$ is $2\pi$-periodic and piecewise $C^1$ then the Fourier series of f converges
+for all x toward $\frac{f(x^-)+f(x^+)}{2}$.}
+
+\proposition{Lemma}{Let $f:\R\rightarrow\R$ be $2\pi$-periodic, continuous and piecewise $C^1$. Define $\phi: \R\rightarrow\C$ by $\phi(t)=f'(t)$ if $f$ is differentiable at $t$ and $\phi(t)=\frac{f'(t^+)+f'(t^-)}{2}$ otherwise. Then we have $c_n(\phi)=$}
+
+\theorem{}{Let $f$ be a continuous, piecewise $C^1$, $2\pi$-periodic function. Then the Fourier
+series of $f$ converges uniformly to $f$ on $\R$.}
+
+
+\newpage
+\section{Differential equations}
+\subsection{Introduction}
+A differential equation is an equation 
+\begin{itemize}
+    \item Whose unknown is a function $y: I\rightarrow E$, $I\subseteq\R$ interval, $E=\R^d$ $d\geq 1$
+    \item of the form $G(t,y,y',...,y^{(n)})=0$ where $G:\Omega\rightarrow\R^n$, $\Omega\subseteq\R\times E^{n+1}$
+\end{itemize}
+
+\subsection{Cauchy-Lipshitz theorem}
+\definition{}{
+\begin{itemize}
+    \item The domain of $(E)$ is $\Omega$ (that is the domain of definition of $F$)
+    \item A \textbf{solution} to the differential equation $(E)$ is a function $\phi:I\rightarrow E$, $I\subseteq\R$ interval
+    
+    such that
+    \begin{itemize}
+        \item $\phi$ is $n$-times differentiable
+        \item $\forall t\in I$, $(t, \phi(t), \phi'(t),\ldots,\phi^{(n-1)}(t))\in\Omega$ and $\phi^{(n)}(t)=F(t,\phi(t),\ldots,\phi^{(n-1)}(t))$
+    \end{itemize}
+\end{itemize}
+}
+
+\proposition{}{Consider the following DE 
+\begin{equation}
+    y'=A(t,y) \tag{E'}.
+\end{equation} Then a $n$ times differentiable function $\phi:I\rightarrow E$ is a solution to (E) iff $$\psi=(\phi,\phi',\ldots,\phi^{(n-1)}:I\rightarrow E^n$$ is a solution to $(E')$.}
+
+\definition{Solution to the Cauchy problem}{Let $(t_0, x_0)\in\Omega$. A solution to the Cauchy problem $$y'=F(t,y), y(t_0)=x_0$$ is a solution $\phi:I\rightarrow E$ to the differential equation $y'=F(t,y)$ such that
+\begin{itemize}
+    \item $t_0\in I$ and
+    \item $\phi(t_0)=x_0$
+\end{itemize}}
+
+\proposition{}{Let $\phi:I\rightarrow\R^d$ be a continuous function such that \begin{enumerate}
+    \item $t_0\in I$
+    \item $\forall t\in I$, $(t, \phi(t))\in\Omega$
+\end{enumerate} 
+Then, $\phi$ is a solution to the Cauchy Problem $y'=F(t,y)$, $y(t_0)=x_0$ if and only if $$\forall t\in I,\: \phi(t)=x_0+\int^t_{t_0}F(s,\phi(s))ds$$}
+
+\definition{}{We say that $F$ is locally Lipshitz in the second variable if for every compact subset $C\subseteq\Omega$ we can find $K>0$ (a priori depending on C) such that $\forall (t,x),(t,y)\in C$, $\| F(t,x)-F(t,y)\|\leq K\|x-y\|$.}
+
+% \remark{If $F$ is}
+
+\theorem{Cauchy-Lipshitz}{Assume that $F$ is continuous and LLSV (e.g. $C^1$). Let $(t_0,x_0)\in\Omega$. Then, the Cauchy pb. $$y'=F(t,y), y(t_0)=x_0$$ admits a solution defined on some open interval (centering $t_0$). Moreover, if $\phi:I\rightarrow E$ and $\psi:J\rightarrow E$ are both solutions to this Cauchy problem, then $\phi=\psi$ on $I\cap J$.}
+
+\remark{When $n>1$, we define similarly a Cauchy problem as a system of the form $$y^{(n)}=F(t,y,\ldots,y^{(n-1)}$$}
+
+\definition{Maximal solution}{
+A solution $\phi:I\rightarrow E$ to $y^{(n)}=F(t, y,y',...,y^{(n-1)})$ is said to be a maximal solution if there is no other solution $\psi:J\rightarrow E$ with $I\subset J$, $J\neq I$ and $\psi=\phi$ on $I$.
+}
+
+\corrolary{Assume $F$ is $C^0$ ans LLSV. Let $(t_0,x_0)\in\Omega$. Then, $\exists!$ maximal solution to the Cauchy problem $y'=F(t,y)$ $y(t_0)=x_0$. \\
+Moreover, this maximal solution is defined on an open interval.}
+
+\proposition{Lemma}{If $f:[a,b)\rightarrow\R^d$ is a Lipschitz function then, $\displaystyle\lim_{t\rightarrow b}f(t)$ exists.}
+
+\proposition{}{Assume that $F$ is $C^0$ and LLSV. Let $\phi:[a,b)\rightarrow\R^d$ be a solution to $y'=F(t,y)$ with $b\in\R$. If there exists a compact set $C\subseteq\Omega$ s.t $$(t, \phi(t))\in C\qquad \forall t\in[a,b).$$ Then $\phi$ can be extended to a solution on the right i.e. $\exists b'>b$ and another solution $\psi:[a,b)\rightarrow\R^d$ to $y'=F(t,y)$ $$\text{with }\psi_{|[a,b)}=\phi.$$}
+
+\subsection{Linear equations}
+
+\proposition{Gronwall lemma}{Let $a<b\in\R$, $\phi, \psi, y:[a,b]\rightarrow[0, +\infty)$ be $C^0$ functions s.t $$y(t)\leq\phi(t)+\int^t_a\psi(s)y(s)ds\qquad \forall t\in[a,b].$$ Then $$y(t)\leq\phi(t)+\int^t_a\phi(s)\psi(s)e^{\int^t_s\psi(u)du}ds\qquad\forall t\in[a,b].$$}
+
+\corrolary{Let $\psi,y:[a,b]\rightarrow[0,+\infty$ be $C^0$ and $c>0$ s.t $y(t)\leq c+\int^t_a\psi(s)y(s)ds$. Then $$y(t)\leq c\cdot e^{\int^t_a\psi(s)ds}.$$}
+
+\corrolary{Let $y:[a,b]\rightarrow\R^d$ be a $C^1$ function and $\alpha, \beta>0$ s.t. $$\|y'(t)\|\leq\alpha\|y(t)\|+\beta$$ for all $t\in[a,b].$ Then, we have $$\|y(t)\|\leq\|y(a)\|e^{\alpha(t-a)}+\frac{\beta}{\alpha}(e^{\alpha(t-a)}-1).$$}
+
+\theorem{}{Let $n\geq 1$, $I\subset\R$ be an open interval and $A:I\rightarrow M_n(\R)$, $B:I\rightarrow\R^n$ be $C^0$. Then, for every $(t_0, Y_0)\in I\times\R^n$ there exists a unique solution to  $$Y'=A(t)Y+B(t), Y(t_0)=Y_0$$ which is defined on all of I. (i.e. maximal solutions are all defined on I)}
+
+\theorem{}{The set $S_H$ of maximal solutions to $Y'=A(t)Y$ is a subvector space of $dim$ n of $C^1(I, \R^n).$}
+
+\corrolary{Let $\phi_1,\ldots,\phi_p$ be maximal solutions to $Y'=A(t)Y$. Then, the rank of the family $(\phi_1(t),\ldots,\phi_p(t))$ is independent of $t$.}
+
+\subsection{First order non linear equations}
+There is no general method! But you can still say something qualitative about solutions.
 \end{document}
