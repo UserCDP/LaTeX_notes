@@ -1,0 +1,389 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[margin=2cm]{geometry}
+\usepackage{cancel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fontawesome5}
+\usepackage{mathtools}
+
+\title{MAA201 Additions}
+\author{daniela.cojocaru}
+\date{January 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{LU decomposition}
+(Gaussian elimination)
+
+Linear system
+$\left\{\begin{array}{cc}
+    a_{11} x_1 + a_{12} x_2 + \ldots + a_{1N}x_N = y_1 & (1)  \\
+    a_{21} x_1 + a_{22} x_2 + \ldots + a_{2N}x_N = y_2 & (2) \\
+    \multicolumn{2}{l}{\quad\vdots} \\
+    \cancel{a_{k1}}x_1 \qquad\text{ (cancel the first coeff)} & (k) \\ %\qquad\qquad\qquad\qquad\qquad\qquad + a_{k2} x_2 + \ldots + a_{kN}x_N = y_k & (k) \\
+    \multicolumn{2}{l}{\quad\vdots} \\
+    a_{N1}x_1 + a_{N2} x_2 + \ldots + a_{NN}x_N = y_N & (N)
+\end{array}, \text{ if lucky } a_{11} \neq 0 \right.$ \\
+
+\vspace{10pt}
+
+$(k) \rightarrow (k) - \displaystyle\frac{a_{k1}}{a_{11}}$ etc.
+
+\vspace{10pt}
+
+Triangular system:
+$\left\{\begin{array}{cccc}
+    a_{11}x_1 + &a_{12}x_2 + &\ldots &+ a_{1N}x_N = y_1 \\
+    \left| \texttt{No} \right| &a_{22}x_2 + &\ldots &+ a_{2N}x_N = y_2 \\
+    \left| x_1\right|  &\left|\texttt{No}\right|  &\ldots \\
+    \left|...\right|  &\left|x_2\right| &\ldots &+ a_{NN}x_N = y_N
+\end{array}\right.$
+
+\vspace{10pt}
+
+Backward substitution
+$\rightarrow$ Solve $(x_N, x_{N-1},\ldots,x_2, x_1)$ in terns of matrices
+
+\vspace{10pt}
+
+M = 
+$\left(\begin{array}{ccc}
+    a_{11} & \ldots & a_{1N} \\
+    \vdots & & \vdots \\
+    a_{N1} & \ldots & a_{NN}
+\end{array}\right)$
+=
+$\left(\begin{array}{c}
+    L_1 \\
+    \vdots \\
+    L_N \\
+\end{array}\right)$
+
+\vspace{10pt}
+
+Sheer matrices transvections
+$T^\lambda_{jk} = \lambda E_{ij} + id$
+
+$L_k \rightarrow L_k - \lambda L_j \longleftrightarrow$ Multiplying $M$ to the left by $T^\lambda_{kj}$
+
+$M\rightarrow T^\lambda_{kj}M$
+
+In Gaussian elimination, all $T^\lambda_{jk}$ used are lower triangular.
+
+$\begin{array}{cc}
+    & \text{upper-triang} \\
+    M\rightarrow T^\lambda_{jk}M\rightarrow T_2 T_1 M\rightarrow & \overbrace{\underbrace{T_k\ldots T_2 T_1} M}\\
+     & \text{a lower triangular} \\
+     & \text{matrix \& invertible}
+\end{array}$
+
+\vspace{10pt}
+
+$\rightarrow M = \underbrace{T^{-1}_1 T^{-1}_2\ldots T_k^{-1}}_{\text{Lower-triang. } L} U$ \\
+$\begin{array}{cc}
+     M = L U \\
+     \qquad\nearrow\quad \nwarrow \\
+     \text{lower tr.} \quad \text{upper tr.}
+\end{array}$
+
+\vspace{10pt}
+
+\underline{\textbf{What if No Luck?\faIcon[regular]{frown}}}
+
+$M$ non invertible $\rightarrow$ OTHER STORY
+
+$M$ invertible $\rightarrow$ switch rows
+
+\vspace{2pt}
+
+$\sigma$: permutation of rows
+
+$M\rightarrow P_\sigma M$
+
+$M\displaystyle\xrightarrow[\text{switch rows}]{\text{step 0}} P_\sigma M \xrightarrow[]{\text{steps 1-k}} \overbrace{T_k - T_1}^{\text{Lower-}\triangle}(P_\sigma M) = U \text{ upper-}\triangle$
+
+\vspace{6pt}
+
+$M=P^{-1}_\sigma (\underbrace{T_1^{-1}\ldots T_k^{-1}}_{\text{lower-}\triangle})U$
+
+\vspace{10pt}
+
+\textbf{\underline{Theorem}}: Every invertible $M\in\mathcal{M}_N(\mathbb{K})$ has a PLU decomposiiton.
+
+\centerline{$M=P\times L\times U$}
+\centerline{$\hspace{-18pt}\prescript{}{\text{permutation}}{\nearrow}\quad\qquad\hspace{-10pt}\nwarrow_\triangle \nwarrow_\triangledown$}
+
+\vspace{20pt}
+
+\underline{\textbf{EXAMPLE}}
+
+$\left(\begin{array}{ccc}
+    1 & 2 & 3 \\
+    4 & 5 & 6 \\
+    7 & 8 & 11
+\end{array}\right)\in GL_3(\mathbb{R})$
+\hspace{10pt}$\begin{array}{c}L_2\leftarrow L_2 - 4 L_1 \\
+L_3\leftarrow L_3 - 7 L_1 \\
+L_3\leftarrow L_3 - 2 L_2
+\end{array}$
+
+$U=\left(\begin{array}{ccc}
+    1 & 2 & 3 \\
+    0 & -3 & -6 \\
+    0 & 0 & 2
+\end{array}\right)$ \\
+
+\noindent Until now: just Gaussian elimination \\
+Now: want to $M=LU$ \\
+
+\noindent$T_{kl}(\lambda): I_3 + \lambda E_{kl}$ \\
+Act on rows $\leftrightarrow$ Multiply by $T_{kl}(\lambda)$'s to the left
+
+\centerline{\underline{$T_{kl}(\lambda)^{-1}=T_{kl}(-\lambda)$}}
+
+
+\noindent\texttt{Step 1}\hspace{20pt} $M_1=T_{21}(-4)M$ \\
+\texttt{Step 2}\hspace{20pt} $M_2=T_{31}(-7)T_{24}(-4)M$ \\
+\texttt{Step 3}\hspace{20pt} $U=M_3=T_{32}(-2)T_{31}(-7)T_{21}(-4)M$ \\
+
+\centerline{$M=\underbrace{T_{21}(-4)^{-1}T_{31}(-7)^{-1}T_{32}(-2)^{-1}}_L U=\underbrace{T_{21}(4)T_{31}(7)T_{32}(2)}_L U$}
+
+$T_{31}(7)T_{32}(2) = \left(\begin{array}{ccc}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 2 & 1
+\end{array}\right)$
+
+$L_3\leftarrow L_3 + 7 L_1$
+
+$T_{21}(4)...$
+
+$L_2\leftarrow L_2 + 4 L_1$
+
+$T_{21}(4) T_{31}(7) T_{32}(2)=
+\left(\begin{array}{ccc}
+    1 & 0 & 0 \\
+    4 & 1 & 0 \\
+    7 & 2 & 0
+\end{array}\right)$
+
+\underline{Reality check \faIcon[regular]{umbrella}}
+
+$M = LU =
+\begin{pmatrix}
+    1 & 0 & 0 \\
+    4 & 1 & 0 \\
+    7 & 2 & 1
+\end{pmatrix}
+\begin{pmatrix}
+    1 & 2 & 3 \\
+    0 & -3 & -6 \\
+    0 & 0 & 2
+\end{pmatrix}
+$
+
+\section{Diagram chase}
+
+$A\hookrightarrow B$ $f$ injective \\
+
+\noindent$A\twoheadrightarrow B$ $f$ surjective \\
+
+\hspace{-16pt}$\begin{array}{c}
+    A \longrightarrow^{f_1} B \\
+    g_1\big\downarrow \hspace{10pt} \circlearrowright \hspace{10pt}\big\downarrow f_2 \\
+    C \longrightarrow_{g_2} D
+\end{array}$ the diagram commutes
+
+\section{Kernel lemma}
+$\ker P(u) \bigoplus \ker Q(u)= \ker PQ(u)$
+
+\noindent$Sp(u) \equiv$ roots of $P_u$
+
+\section{Cramer's rule}
+$A\in \mathcal{M}_N(\mathbb{K})$
+
+\noindent$(Com(A))_{ij}=(-1)^{1+j}\det(A_{\hat{i}\hat{j}})\longleftarrow$remove row $i$ and column $j$\\
+
+\noindent\underline{\textbf{Theorem}}: $A\times Com(A)^t = det(A)\times I_n$
+
+\noindent\underline{Corrolary}: If $A\in GL_n(\mathbb{K}), det(A)\neq 0, so A^{-1}=\frac{1}{det(A)}Com(A)^t$
+
+\section{3 ways to invert a matrix}
+    \subsection{Cramer's rule}
+    $A\in \mathcal{M}_n(\mathbb{K})$ (all matrices)
+    [explained above]
+
+    \subsection{Schur Complements ("Block" and LU decomposition)}
+    $\begin{array}{c}
+         k\updownarrow \\
+         l\updownarrow
+    \end{array}\begin{pmatrix}
+        A_{(k\times k)} & B \\
+        C & D_{(l\times l)} \\
+    \end{pmatrix}$
+
+    $\hspace{20pt}\begin{array}{cc}
+        \longleftrightarrow_k & \longleftrightarrow_l 
+    \end{array}$
+
+    Assume that $A\in GL_k(\mathbb{K})$\\
+
+    $\begin{pmatrix}
+        I_k & 0 \\
+        -CA^{-1} & I_k
+    \end{pmatrix}
+    \begin{pmatrix}
+        A & B \\
+        C & D
+    \end{pmatrix} = 
+    \begin{pmatrix}
+        A & B \\
+        0 & D-CA^{-1}B
+    \end{pmatrix}$\\
+
+    $D-CA^{-1}B$ - Schur complement
+
+    Let's assume that $\begin{pmatrix}
+        A & B \\
+        C & D
+    \end{pmatrix}\in GL_n(\mathbb{K}) \Leftrightarrow D-CA^{-1}B\in GL_l$ \\
+
+    $\begin{pmatrix}
+        A & B \\
+        C & D
+    \end{pmatrix}^{-1} = 
+    \begin{pmatrix}
+        A & B \\
+        0 & D-CA^{-1}B
+    \end{pmatrix}^{-1}
+    \begin{pmatrix}
+        I_k & 0 \\
+        -CA^{-1} & I_l
+    \end{pmatrix} =
+    \begin{pmatrix}
+        \bigstar & \bigstar \\
+        \bigstar & (D-CA^{-1}B)^{-1}
+    \end{pmatrix}$\\
+
+
+    \underline{\textbf{Theorem}}:
+    If $\begin{pmatrix}
+        A & B \\
+        C & D
+    \end{pmatrix}\in GL_n(k)$, and $A\in GL_k (\mathbb{K})$, then the Schur complement $D-CA^{-1}B\in GL_l$ and 
+    $\begin{pmatrix}
+        A & B \\
+        C & D
+    \end{pmatrix}^{-1} =
+    \begin{pmatrix}
+        \bigstar & \bigstar \\
+        \bigstar & (D-CA^{-1}B)^{-1}
+    \end{pmatrix}$
+
+    \subsection{Diagonalization}
+    $\begin{pmatrix}
+        \lambda_1 & \ldots\ldots & 0 \\
+        \vdots & 0 \ddots 0 & \vdots \\
+        0 & \ldots\ldots & \lambda_n
+    \end{pmatrix}^{-1}=
+    \begin{pmatrix}
+        \lambda_1^{-1} & \ldots\ldots & 0 \\
+        \vdots & 0 \ddots 0 & \vdots \\
+        0 & \ldots\ldots & \lambda_n^{-1}
+    \end{pmatrix}$
+
+    Diagonisable: $M=P\triangle P^{-1}$, $\triangle$ chanage of basis \\
+
+    $    M^{-1} = P\triangle^{-1} P^{-1}
+          = P\begin{pmatrix}
+             \lambda_1^{-1} & \ldots\ldots & 0 \\
+        \vdots & 0 \ddots 0 & \vdots \\
+        0 & \ldots\ldots & \lambda_n^{-1}
+         \end{pmatrix} P^{-1}
+    $\\
+    
+    $M^{k} = P\triangle^k P^{-1} = P\begin{pmatrix}
+             \lambda_1^k & \ldots\ldots & 0 \\
+        \vdots & 0 \ddots 0 & \vdots \\
+        0 & \ldots\ldots & \lambda_n^k
+         \end{pmatrix} P^{-1}$
+
+\section{Sequences}
+\hspace{10pt}$u_{n+2}=u_{n+1}+u_n$
+
+$u_0=0, u_1 = 1$
+
+Introduce $v_n=\begin{pmatrix}
+     u_{n+1} \\
+     u_n
+\end{pmatrix}, \begin{pmatrix}
+     u_{u+2} \\
+        u_{n+1}
+\end{pmatrix}=\begin{pmatrix}
+    u_n+u_{n+1} \\
+    u_{n+1}
+\end{pmatrix} = \begin{pmatrix}
+    1 & 1 \\
+    1 & 0
+\end{pmatrix}\begin{pmatrix}
+    u_{n+1} \\
+    u_n
+\end{pmatrix}$ \\
+
+$v_n=A^n v_0, v_0=\begin{pmatrix}
+    1\\
+    0
+\end{pmatrix}$
+
+Compute $A^n$?
+
+$\rightarrow$ Diagonalize
+
+$\chi_A(X)=det(A-XI_2) = \begin{pmatrix}
+    1-X & 1 \\
+    1 & -X
+\end{pmatrix}=(1-X)(-X)-1 = X^2-X-1 = (X-\varphi)(X-\overline{\varphi})$ \\
+
+\noindent$\Rightarrow$ A is diagonizable $\Leftrightarrow$ $P_A=(X-\varphi)(X-\overline{\varphi})$ \\
+$\Leftrightarrow E_\varphi \oplus E_{\overline{\varphi}} = \mathbb{R}^2$
+
+$\longrightarrow$ Now, find $P\in GL_2(\mathbb{R})$ such that $A=P\begin{pmatrix}
+    \varphi & 0 \\
+    0 & \overline{\varphi}
+\end{pmatrix}P^{-1}$
+
+Switch from the canonical basis $(e_1=\begin{pmatrix} 1 \\ 0 \end{pmatrix}, e_2=\begin{pmatrix}0 \\ 1 \end{pmatrix})$ to a basis of eigenvectors
+
+$P^{-1}=\begin{pmatrix}
+    1 & -\overline{\varphi} \\
+    -1 & \varphi
+\end{pmatrix}$
+
+$A^k=P\begin{pmatrix}
+    \varphi^k & 0 \\
+    0 & \overline{\varphi}^k
+\end{pmatrix}P^{-1}$
+
+We get $u_n=\frac{1}{\sqrt{5}}(\varphi^n-\overline{\varphi}^n)$
+
+
+\section{Field expansion}
+\underline{\textbf{Theorem}}: For all fields $\mathbb{K}$, $P\in\mathbb{K}[X]$ irreductible, there exists a field $\mathbb{L}$ $(\mathbb{K}$ subfield of $\mathbb{L})$ such that $P (\in\mathbb{L}[X])$ has a root in $\mathbb{L}.$ (principal ideal domain: every ideal is of the form $(P(X))=P(X)\cdot\mathbb{K}[X]$\\
+
+\noindent\textbf{FACT}: For any field $\mathbb{K}$, there exists $\overline{\mathbb{K}}$ "algebraic closure" such that every polynomial splits in $\overline{\mathbb{K}}$ \\
+
+\noindent\underline{\textbf{Definition}}: "generalized eigenspaces"
+
+$\lambda_i\in Sp(M), v_{\lambda_i}=Ker((M-\lambda_i I_n)^{m_i})$
+
+\section{Remarks on triangular matrices}
+(1) Eigenvalues of $T\equiv\{T_{ii}, i=1...n\}$
+
+\noindent(2) If $T_{ii}=0, \forall i=1...n$ then $T^n=O_{nn}$, nilpotent with index $\leq n$\\
+
+\underline{\textbf{Theorem (Cayley-Hamilton)}}: $\chi_M(M) = 0_{n\times n}$
+    
+\end{document}
