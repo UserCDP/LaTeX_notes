@@ -1,0 +1,202 @@
+\documentclass{article}
+
+%\documentclass[10pt,a4paper,twocolumn]{article}
+\usepackage[top=40pt,bottom=80pt,left=52pt,right=50pt]{geometry}
+
+%\usepackage[utf8]{inputenc}
+
+\begin{document}
+\title{Linear Algebra Theory}
+
+\setlength{\textwidth}{1000pt}
+
+\hspace{10pt}
+
+\section{Vector Spaces}
+\subsection{Definition}
+
+%\setlength{\textwidth}{600pt}%
+A \textbf{vector space} is a set $V$ along with an addition on $V$ and a scalar multiplication on $V$ such that the following properties hold:
+\vspace{10pt}
+
+\textbf{commutativity}: \hspace{57pt}{$u+v = v+u$ for all $u, v \in V$}
+
+\textbf{additive identity}: \hspace{48pt}{there exists an element $v \in V$ such that $v+0=v$ for all $v\in V$}
+
+\textbf{additive inverse}: \hspace{53pt}{for every $v\in V$, there exists $w\in V$ such that $v+w=0$}
+
+\textbf{multiplicative identity}: \hspace{20pt}{$1v=v$ for all $v \in V$}
+
+\textbf{distributive properties}: \hspace{20pt}{$a(u+v)=au+av$ and $(a+b)v=av+bv$ for all $a,b \in F$ and all $u,v\in V$}
+
+%\vspace{10pt}
+
+\section{Subspaces}
+\subsection{Conditions for a subspace}
+
+A subset $U$ of $V$ is a subspace of $V$ if and only if $U$ satisfies the following three conditions:
+\vspace{10pt}
+
+    \textbf{additive identity}:  \hspace{95pt}{$0 \in U$}
+    
+    \textbf{closed under addition}: \hspace{70pt}{$u,w \in U$ implies $u+w \in U$}
+
+    \textbf{closed under scalar multiplication}: \hspace{10pt}$a \in F$ and $u \in U$ implies $au \in U$
+
+%\vspace{10pt}
+
+\section{Finite Dimension Subspaces}
+\subsection{Definition of a linear combination}
+
+A \textbf{linear combination} of a list $v_1,..., v_m$ of vectors in $V$ is a vector of the form
+\vspace{4pt}
+
+\centerline{$a_1 v_1+ ... + a_m v_m$}
+
+\parindent=0pt where $a_1,...,a_m \in F$.
+
+\subsection{Definition of span}
+%\parbox{\textwidth}{
+The set of all linear combinations of a list of vectors $v_1, ..., v_m \in V$ is called the \textbf{span} of $v_1,..., v_m$, denoted $span(v_1,..., v_m)$. In other words,
+
+\centerline{$span(v_1,..., v_m) = \{a_1v_1+...+a_mv_m : a_1,...,a_m \in \mathbf{F} \}$}
+\vspace{8pt}
+$\rightarrow$ The span of the empty list $( )$ is defined to be $\{0\}$.
+%}
+
+\subsection{Property}
+
+    The length of every spanning list must be at least as long as every linearly independent list.
+    \vspace{8pt}
+    
+    \centerline{$dim(U_1+U_2) = dim(U_1) + dim(U_2) - dim(U_1 \cap U_2)$}
+    
+    
+\section{Linear Maps}
+\subsection{Definition of a linear map}
+    
+A linear map from V to W is a function $T: V \to W$ with the following properties:
+
+\parindent=24pt
+    \textbf{additivity}: \hspace{30pt}$T(u+v)=Tu + Tv$ for all $u,v \in V$
+    
+    \textbf{homogeneity}: \hspace{15pt}$T(\lambda v) = \lambda T(v)$ for all $\lambda \in F$ and all $v \in V$
+
+\newpage
+
+\subsection{Properties}
+The following properties hold for all linear maps:
+
+    \textbf{zero}: \hspace{70pt}$0 \in \mathcal{L}(V,W)$ is defined by $0v=0$
+    
+    \textbf{identity}: \hspace{52pt}$I \in \mathcal{L}(V,W)$ is defined by $Iv=v$
+    
+    \textbf{differentiation}: \hspace{15pt} $D \in \mathcal{L}(\mathcal{P}(\mathbf{R}),\mathcal{P}(\mathbf{R}))$ is defined by \hspace{2pt} $Dp = p'$ \hspace{2pt} or \hspace{2pt}$(f+g)' = f'+g'$ and $(\lambda f)'=\lambda f'$
+    
+    \textbf{integration}: \hspace{36pt}$T \in \mathcal{L}(\mathcal{P}(\mathbf{R}),\mathbf{R})$ is defined by $Tp = \int_0^1 p(x)dx$
+
+
+\subsection{Definition addition and multiplication on $\mathcal{L}(V,W)$}
+
+    Suppose $S,T \in \mathcal{L}(V,W)$ and $\lambda \in F$. The \textbf{sum} $S + T$ and the \textbf{product} $\lambda T$ are the linear maps from V to W defined by
+    \vspace{4pt}
+    
+    \centerline{$(S+T)(v) = Sv + Tv$ and $(\lambda T)(v) = \lambda (Tv)$}
+    
+\parindent=0pt for all $v \in V$
+
+
+\subsection{Definition of product of linear maps}
+If $T \in \mathcal{L}(U,V)$ and $S \in \mathcal{L}(V,W)$, then the \textbf{product} $ST \in \mathcal{L}(U,W)$ is defined by
+\vspace{4pt}
+
+\centerline{$(ST)(u)=S(Tu)$}
+
+for $u \in U$
+
+
+\subsection{Definition of Null Space (Kernel)}
+For $T \in \mathcal{L}(V,W)$ the \textbf{null space} of T, denoted null $T$ is the subset of $V$ consisting of those vectors that $T$ maps to 0
+\vspace{4pt}
+
+\centerline{$null T = \{v \in V: Tv=0\}$}
+
+null $T$ is a subspace of $V$
+\subsubsection{Definition of injectivity}
+Let $T \in \mathcal{L}(V,W)$. Then $T$ is injective if and only if \textbf{null $T$ = {0}}
+%}
+
+\subsection{Definition of Range (Image)}
+For $T$ a function from $V$ to $W$, the \textbf{range} of $T$ is the subset of $W$ consisting of those vectors that are of the form $Tv$ for some $v \in V$:
+\vspace{4pt}
+
+\centerline{$range T = \{Tv : v \in V\}$}
+
+$\rightarrow$ range $T$ is a subspace of $W$
+
+\subsubsection{Definition of surjectivity}
+A function $T: V \to W$ is called \textbf{surjective} if its range equals $W$.
+
+\vspace{10pt}
+\subsection{FUNDAMENTAL THEOREM OF LINEAR MAPS}
+Suppose $V$ is finite-dimensional and $T \in \mathcal{L}(V,W)$. Then $range T$ is finite-dimensional and
+\vspace{4pt}
+
+\centerline{dim$V$ = dim null$T$ + dim range$T$}
+
+\vspace{20pt}
+
+$\rightarrow$A homogeneous system of linear equations with more variables than equations has nonzero solutions.
+
+$\rightarrow$An inhomogeneous system of linear equations with more equations than variables has no solution for some choice of the constant terms.
+
+\newpage
+
+\section{Matrices}
+\subsection{Definition of the matrix of a linear map}
+
+Suppose $T \in \mathcal{L}(V,W)$ and $v_1,...,v_n$ is a basis of $V$ and $w_1,...,w_m$ is a basis of $W$. The \textbf{matrix of} $T$ with respect to these bases is the $m$-by-$n$ matrix $\mathcal{M}(T)$ whose entries $A_{j,k}$ are defined by
+\vspace{4pt}
+
+\centerline{$Tv_k = A_{1,k}w_1+...+A_{m,k}w_m$}
+\vspace{10pt}
+
+$\rightarrow$ If the bases are not clear from the context, then the notation $\mathcal{M}(T,(v_1,...,v_n),(w_1,...,w_m))$ is used.
+\vspace{10pt}
+
+Suppose $S,T \in \mathcal{L}(V,W)$. Then
+
+\centerline{$\mathcal{M}(S+T) = \mathcal{M}(S) + \mathcal{M}(T)$}
+
+Suppose $\lambda \in F$ and $T\in\mathcal{L}(V,W)$. Then
+
+\centerline{$\mathcal{M}(\lambda T) = \lambda\mathcal{M}(T)$}
+
+If $T\in\mathcal{L}(U,V)$ and $S\in\mathcal{L}(V,W)$. Then
+
+\centerline{$\mathcal{M}(ST)=\mathcal{M}(S)\mathcal{M}(T)$}
+
+\section{Invertibility and Isomorphic Vector Spaces}
+\subsection{Definition of invertible and inverse}
+
+\parindent=0pt A linear map $T \in \mathcal{L}(V, W)$ is called \textbf{invertible} if there exists a linear map $S \in \mathcal{L}(W, V)$ such that $S T$ equals the identity map on $V$ and $T S$ equals the identity map on $W$.
+\vspace{6pt}
+
+A linear map $S \in \mathcal{L}(W, V)$ satisfying $ST= I$ and $T S = I$ is called an \textbf{inverse} of $T$ (note that the ﬁrst $I$ is the identity map on $V$ and the second $I$ is the identity map on $W$). It is denoted with $T^{-1}$.
+\vspace{8pt}
+
+$\rightarrow$ An invertible linear map has a unique inverse.
+\vspace{4pt}
+
+$\rightarrow$ A linear map is invertible if and only if it is injective and surjective.
+
+\subsection{Definition of isomorphic and isomorphism}
+$\rightarrow$An \textbf{isomorphism} is an invertible linear map.
+
+$\rightarrow$Two vector spaces are called \textbf{isomorphic} if there is an isomorphism from one vector space onto the other one.
+
+\subsection{Operators}
+A linear map from a vector space to itself is called an \textbf{operator}.
+The notation $\mathcal{L}(V)$ denotes the set of all operators on $V$. In other words, $\mathcal{L}(V) = \mathcal{L}(V, V)$.
+\end{document}
+
